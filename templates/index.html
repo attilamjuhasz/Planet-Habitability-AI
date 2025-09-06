@@ -1,0 +1,314 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exoplanet Habitability Analyzer | Professional AI Analysis</title>
+    <link rel="shortcut icon" type="image/png" href="/static/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        :root {
+            --primary: #2563eb;
+            --success: #16a34a;
+            --danger: #dc2626;
+            --text: #1f2937;
+            --text-light: #6b7280;
+        }
+        
+        body {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(17, 24, 39, 0.98)),
+                        url('/static/planet.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.4;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iNSIgY3k9IjUiIHI9IjEiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuMyIvPjwvc3ZnPg==');
+            animation: twinkle 15s infinite linear;
+        }
+
+        @keyframes twinkle {
+            0% { background-position: 0 0; }
+            100% { background-position: 1000px 1000px; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+            padding: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.75rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            background: linear-gradient(90deg, #fff, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+        }
+
+        .header p {
+            font-size: 1.125rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #e2e8f0;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-predict {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 16px;
+        }
+
+        .btn-predict:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .btn-advanced {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            color: #93c5fd;
+            border: 1px solid #93c5fd;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 16px;
+        }
+
+        .btn-advanced:hover {
+            background: rgba(147, 197, 253, 0.1);
+        }
+
+        .result {
+            margin-top: 32px;
+            padding: 24px;
+            border-radius: 16px;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result.habitable {
+            background: rgba(22, 163, 74, 0.2);
+            border-color: rgba(22, 163, 74, 0.3);
+        }
+
+        .result.not-habitable {
+            background: rgba(220, 38, 38, 0.2);
+            border-color: rgba(220, 38, 38, 0.3);
+        }
+
+        .result h3 {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .result p {
+            color: #e2e8f0;
+            margin-bottom: 8px;
+        }
+
+        .credit {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.875rem;
+            color: #94a3b8;
+        }
+
+        #error-message {
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid rgba(220, 38, 38, 0.2);
+            color: #fecaca;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 24px 16px; }
+            .form-container { padding: 32px 24px; }
+            .header h1 { font-size: 2rem; }
+            .form-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="container">
+        <div class="header">
+            <h1>Exoplanet Habitability Analyzer</h1>
+            <p>Leverage advanced AI technology to assess the habitability potential of exoplanets with precision and accuracy</p>
+        </div>
+        
+        <div class="form-container">
+            <form method="POST" class="needs-validation" onsubmit="return validateForm()">
+                <div id="error-message">
+                    Please provide reasonable measurements for accurate analysis
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Planet Mass (Earth masses)</label>
+                        <input type="number" step="any" class="form-control" name="mass" required maxlength="15">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Planet Radius (Earth radii)</label>
+                        <input type="number" step="any" class="form-control" name="radius" required maxlength="15">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Host Star Age (billions of years)</label>
+                        <input type="number" step="any" class="form-control" name="age" required maxlength="15">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tidal Lock (0-No or 1-Yes)</label>
+                        <input type="number" step="1" min="0" max="1" class="form-control" name="tidalLock" required maxlength="15">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Habitable Zone Confidence (0-1)</label>
+                        <input type="number" step="any" min="0" max="1" class="form-control" name="habzone" required maxlength="15">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Earth Similarity Index (0-1)</label>
+                        <input type="number" step="any" min="0" max="1" class="form-control" name="esi" required maxlength="15">
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-predict">Analyze Planet</button>
+            </form>
+
+            {% if pred is not none %}
+            <div class="result {% if pred == 1 %}habitable{% else %}not-habitable{% endif %}">
+                <h3>Analysis Complete</h3>
+                <p>This planet is {% if pred == 1 %}potentially habitable{% else %}not habitable{% endif %}</p>
+                <p>Likeliness of Habitability: {{ "%.2f"|format(prob*100) }}%</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="credit">
+            <a href="https://www.kaggle.com/datasets/chandrimad31/phl-exoplanet-catalog?resource=download" target="_blank" style="color: #93c5fd; text-decoration: none; margin: 0 10px;">Access Data Set</a> | 
+            <a href="/purpose" style="color: #93c5fd; text-decoration: none; margin: 0 10px; traget=_blank;"">Purpose</a>
+            <br>
+            Developed by Attila Juhasz | Powered by Advanced Machine Learning
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            const inputs = document.querySelectorAll('input[required]');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value || input.value.length > 15) {
+                    isValid = false;
+                    input.style.borderColor = 'rgba(220, 38, 38, 0.5)';
+                } else {
+                    input.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                }
+            });
+            
+            const errorMessage = document.getElementById('error-message');
+            errorMessage.style.display = isValid ? 'none' : 'block';
+            
+            return isValid;
+        }
+
+        function toggleAdvanced() {
+            const advancedFields = document.getElementById('advanced-fields');
+            const btn = document.querySelector('.btn-advanced');
+            if (advancedFields.style.display === 'none') {
+                advancedFields.style.display = 'block';
+                btn.textContent = 'Hide Advanced Options';
+            } else {
+                advancedFields.style.display = 'none';
+                btn.textContent = 'Show Advanced Options';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Purpose | Exoplanet Habitability Analyzer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+        :root { --primary: #2563eb; --success: #16a34a; --danger: #dc2626; --text: #1f2937; --text-light: #6b7280; }
+        body { background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(17, 24, 39, 0.98)), url('/static/planet.jpg') no-repeat center center fixed; background-size: cover; color: #fff; min-height: 100vh; line-height: 1.5; }
+        .stars { position: fixed; width: 100%; height: 100%; pointer-events: none; opacity: 0.4; background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iNSIgY3k9IjUiIHI9IjEiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuMyIvPjwvc3ZnPg=='); animation: twinkle 15s infinite linear; }
+        @keyframes twinkle { 0% { background-position: 0 0; } 100% { background-position: 1000px 1000px; } }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 24px; position: relative; z-index: 1; }
+        .header { text-align: center; margin-bottom: 48px; padding: 20px; }
+        .header h1 { font-size: 2.75rem; font-weight: 600; margin-bottom: 16px; background: linear-gradient(90deg, #fff, #93c5fd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.02em; }
+        .content { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border-radius: 24px; padding: 48px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .content p { margin-bottom: 20px; color: #e2e8f0; }
+        .btn-back { display: inline-block; padding: 12px 24px; background: var(--primary); color: #fff; text-decoration: none; border-radius: 12px; margin-top: 20px; }
+        .btn-back:hover { background: #1d4ed8; }
+        @media (max-width: 768px) { .container { padding: 24px 16px; } .content { padding: 32px 24px; } .header h1 { font-size: 2rem; } }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="container">
+        <div class="header">
+            <h1>Purpose</h1>
+        </div>
+        <div class="content">
+            <p>The Exoplanet Habitability Analyzer uses machine learning to predict the habitability of exoplanets based on their characteristics. This AI model has been trained on the PHL Exoplanet Catalog, which houses data on real, already discovered exoplanets, to determine habitability potential, saving hours in the lab.</p>
+            <p>By analyzing features such as planet mass, radius, star age, and other factors, the system provides scientifically grounded predictions about an exoplanet's potential to support life in just seconds, increasing the productivity of scientists and researchers, allowing them to allocate time to more important tasks.</p>
+            <a href="/" class="btn-back">Back to Analyzer</a>
+        </div>
+    </div>
+</body>
+</html>
